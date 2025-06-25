@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Соглашение</title>
+  <meta charset="utf-8">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    .content { max-height: 60vh; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; }
+    button { font-size: 1.2em; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h2>Соглашение</h2>
+  <div class="content">
+    <p>Текст вашего соглашения...</p>
+    <!-- Можно вставить длинный текст или даже ссылку на PDF -->
+  </div>
+  <button onclick="Telegram.WebApp.sendData('accepted')">Принять</button>
+  <button onclick="Telegram.WebApp.close()">Закрыть</button>
+</body>
+</html>
