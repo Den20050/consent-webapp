@@ -265,33 +265,30 @@
         </div>
     </div>
 
+    <!-- КНОПКИ ВНИЗУ -->
+    <div style="position:sticky;bottom:0;left:0;width:100%;background:#fff;padding:24px 0 12px 0;text-align:center;z-index:100;">
+        <button id="acceptBtn" style="background:#27ae60;color:#fff;border:none;padding:12px 32px;margin:0 10px 0 0;border-radius:5px;font-size:1.1em;cursor:pointer;">Принять</button>
+        <button id="declineBtn" style="background:#e74c3c;color:#fff;border:none;padding:12px 32px;border-radius:5px;font-size:1.1em;cursor:pointer;">Отказаться</button>
+    </div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        function switchLanguage(lang) {
-            // Hide all languages
-            document.querySelectorAll('.language').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // Show selected language
-            document.getElementById(lang).classList.add('active');
-            
-            // Update button states
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent.toLowerCase().includes(lang)) {
-                    btn.classList.add('active');
-                }
-            });
-
-            // Save language preference
-            localStorage.setItem('preferredLanguage', lang);
-        }
-
-        // Load preferred language if saved
-        document.addEventListener('DOMContentLoaded', function() {
-            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'ru';
-            switchLanguage(preferredLanguage);
-        });
+    // Смена языка
+    function switchLanguage(lang) {
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.language').forEach(div => div.classList.remove('active'));
+        document.querySelector('.lang-btn[onclick*="'+lang+'"').classList.add('active');
+        document.getElementById(lang).classList.add('active');
+    }
+    // Кнопки WebApp
+    document.getElementById('acceptBtn').onclick = function() {
+        if(window.Telegram && Telegram.WebApp) Telegram.WebApp.sendData('accepted');
+    };
+    document.getElementById('declineBtn').onclick = function() {
+        if(window.Telegram && Telegram.WebApp) Telegram.WebApp.sendData('declined');
+    };
+    // Стилизация под белый фон и чёрный текст
+    document.body.style.background = '#fff';
+    document.body.style.color = '#111';
     </script>
 </body>
 </html>
