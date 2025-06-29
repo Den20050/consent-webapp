@@ -272,12 +272,27 @@
     </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+    // Переводы для кнопок
+    const translations = {
+        ru: { accept: "Принять", decline: "Отказаться" },
+        en: { accept: "Accept", decline: "Decline" }
+    };
     // Смена языка
     function switchLanguage(lang) {
+        console.log("Switching language to", lang);
         document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.lang-btn[onclick*="'+lang+'"]').classList.add('active');
         document.querySelectorAll('.language').forEach(div => div.classList.remove('active'));
-        document.querySelector('.lang-btn[onclick*="'+lang+'"').classList.add('active');
         document.getElementById(lang).classList.add('active');
+        // Меняем надписи на кнопках согласия
+        try {
+            console.log("До смены текста на кнопках");
+            document.getElementById('acceptBtn').textContent = translations[lang].accept;
+            document.getElementById('declineBtn').textContent = translations[lang].decline;
+            console.log("После смены текста на кнопках");
+        } catch (e) {
+            console.error("Ошибка при смене текста на кнопках:", e);
+        }
     }
     // Кнопки WebApp
     document.getElementById('acceptBtn').onclick = function() {
